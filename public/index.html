@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
   <title>Ludo with GF</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      font-family: Arial, sans-serif;
       background: #0f172a;
       color: white;
+      font-family: Arial;
       text-align: center;
-      padding-top: 50px;
+      padding-top: 80px;
     }
     button {
-      padding: 12px 20px;
-      font-size: 16px;
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 8px;
       border: none;
-      border-radius: 6px;
-      cursor: pointer;
       background: #22c55e;
       color: black;
+      cursor: pointer;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>🎲 Ludo with GF</h1>
-  <p>Simple demo site is LIVE</p>
+<h1>🎲 Ludo with GF ❤️</h1>
+<p id="roomText">No room yet</p>
 
-  <button onclick="alert('Next step: Room system')">
-    Create Room
-  </button>
+<button onclick="createRoom()">Create Room</button>
+
+<script>
+function createRoom() {
+  const roomId = Math.random().toString(36).substring(2, 8);
+  const url = window.location.origin + window.location.pathname + "?room=" + roomId;
+  document.getElementById("roomText").innerText = "Room ID: " + roomId;
+  alert("Share this link:\n" + url);
+}
+</script>
 
 </body>
 </html>
