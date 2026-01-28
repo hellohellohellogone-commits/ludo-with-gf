@@ -1,59 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ludo With GF</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Ludo with GF</title>
   <style>
     body {
-      background: #111;
-      color: white;
       font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
       text-align: center;
-      padding-top: 40px;
+      padding-top: 50px;
     }
     button {
-      padding: 15px 25px;
-      font-size: 18px;
-      background: #ff0055;
-      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
       border: none;
       border-radius: 6px;
-      margin-top: 20px;
+      cursor: pointer;
+      background: #22c55e;
+      color: black;
     }
   </style>
 </head>
 <body>
 
-<h1>🎲 Ludo With GF ❤️</h1>
-<p id="status">Create a room to start</p>
+  <h1>🎲 Ludo with GF</h1>
+  <p>Simple demo site is LIVE</p>
 
-<button onclick="createRoom()">Create Room</button>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  const socket = io();
-  let roomId = window.location.pathname.split("/")[2];
-
-  function createRoom() {
-    roomId = "GF" + Math.floor(1000 + Math.random() * 9000);
-    window.location.href = "/room/" + roomId;
-  }
-
-  if (roomId) {
-    socket.emit("join-room", roomId);
-  }
-
-  socket.on("room-update", (count) => {
-    if (count === 1) {
-      document.getElementById("status").innerText =
-        "Waiting for other player...";
-    }
-    if (count === 2) {
-      document.getElementById("status").innerText =
-        "Both players joined ✅";
-    }
-  });
-</script>
+  <button onclick="alert('Next step: Room system')">
+    Create Room
+  </button>
 
 </body>
 </html>
