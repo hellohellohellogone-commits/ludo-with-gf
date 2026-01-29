@@ -3,6 +3,7 @@
 <head>
   <title>Ludo with GF</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     body {
       background: #0f172a;
@@ -17,31 +18,50 @@
       border-radius: 8px;
       border: none;
       background: #22c55e;
-      color: black;
       cursor: pointer;
-    }
-    input {
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 10px;
     }
   </style>
 </head>
+
 <body>
 
-<h1>🎲 Ludo with GF ❤️</h1>
-<p id="roomText">No room yet</p>
+  <h1>🎲 Ludo with GF ❤️</h1>
+  <p id="roomText">No room yet</p>
 
-<button onclick="createRoom()">Create Room</button>
+  <button onclick="createRoom()">Create Room</button>
 
-<script>
-function createRoom() {
-  const roomId = Math.random().toString(36).substring(2, 8);
-  const url = window.location.origin + window.location.pathname + "?room=" + roomId;
-  document.getElementById("roomText").innerText = "Room ID: " + roomId;
-  alert("Share this link:\n" + url);
-}
-</script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBHVLoAMsZnSCWROEtSOEYsIn6I9QL_TA",
+      authDomain: "ludo-with-gf.firebaseapp.com",
+      projectId: "ludo-with-gf",
+      storageBucket: "ludo-with-gf.appspot.com",
+      messagingSenderId: "760440207777",
+      appId: "1:760440207777:web:471389f9d3036d6c14038"
+    };
+
+    // Init Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Create Room
+    function createRoom() {
+      const roomId = Math.random().toString(36).substring(2, 8);
+
+      db.collection("rooms").doc(roomId).set({
+        createdAt: new Date()
+      });
+
+      const url = window.location.origin + window.location.pathname + "?room=" + roomId;
+      document.getElementById("roomText").innerText = "Room ID: " + roomId;
+      alert("Share this link:\n" + url);
+    }
+  </script>
 
 </body>
 </html>
